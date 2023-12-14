@@ -1,0 +1,94 @@
+:root {
+    --main-color: #175797;
+    --font-color: #333333;
+    --font-color-inverse: #ffffff;
+    --font-color-inverse-2: #cccccc;
+    --side-color: #1b1b1b;
+    --side-color-active: #ffffff;
+    --sidebar-size: 200px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+/* -------- Dash default override -------- */
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner td, .dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner th {
+    padding: 6px 10px;
+    color: rgb(95, 99, 104);
+    text-align: left;
+    vertical-align: top;
+    word-break: break-word;
+    font-size: 12px;
+    line-height: 16px;
+    width: 150px;
+}
+
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner th {
+    font-weight: bold;
+}
+
+/* -------- Sidebar -------- */
+.sidebar {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    margin: 0;
+    width: var(--sidebar-size);
+    background-color: var(--side-color);
+    color: var(--font-color-2);
+    overflow-y: auto;
+}
+.sidebar-container {
+    height: 100%;
+}
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: var(--font-color-inverse);
+}
+.sidebar-title, .sidebar-subtitle {
+    margin: 0;
+}
+.sidebar-subtitle {
+    color: var(--font-color-inverse-2);
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.sidebar .sidebar-container .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+    padding: 10px 0;
+}
+
+.sidebar .sidebar-container .sidebar-menu .sidebar-item {
+    display: flex;
+    /* box-sizing: border-box; */
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    width: calc(100% - 10px);
+    border-radius: 0 10px 10px 0;
+    border: none;
+    background: none;
+    color: var(--font-color-inverse);
+    text-decoration: none;
+}
+.sidebar .sidebar-container .sidebar-menu .sidebar-item.active {
+    color: var(--font-color);
+    background-color: var(--side-color-active);
+}
+
+/* -------- Main -------- */
+.page-container {
+    margin-left: var(--sidebar-size);
+    padding: 5px 15px;
+}

@@ -1,21 +1,87 @@
 # Import packages
-from dash import Dash, html, dash_table, dcc
+import dash
+from dash import Dash, html, dcc, Input, Output, ALL
+from pages import home, page1, page2
 import pandas as pd
-import plotly.express as px
 
 # Initialize the app
-app = Dash(__name__)
+app = Dash(
+    __name__,
+    meta_tags=[{'name': 'viewport', 'content': 'width=device-width, initial-scale=1'}],
+    title='Projet Dash'
+)
 
-# Incorporate data
-df = pd.read_csv('./data/athlete_events.csv')
+# Initialize data
+df_athlete = pd.read_csv('./data/athlete_events.csv')
+df_noc = pd.read_csv('./data/noc_regions.csv')
 
-# App layout
-app.layout = html.Div([
-    html.Div(children='My First App with Data'),
-    dash_table.DataTable(data=df.to_dict('records'), page_size=50),
-    dcc.Graph(figure=px.histogram(df, x='Year', y='Age', histfunc='avg')),
-    dash_table.DataTable(df.groupby('NOC')['NOC'].transform('count'))
+# Enumerate pages
+pages = [
+    {
+        'id': 'home',
+        'name': 'Page d\'accueil',
+        'layout': home.create_layout()
+    },
+    {
+        'id': 'page1',
+        'name': 'Page 1',
+        'layout': page1.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
+    },
+    {
+        'id': 'page2',
+        'name': 'Page 2',
+        'layout': page2.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
+    }
+]
+
+# -------------------- Sidebar --------------------
+sidebar = html.Div(className='sidebar', children=[
+    html.Div(className='sidebar-container', children=[
+        html.Div(className='sidebar-header', children=[
+            html.H2('Projet Dash', className='sidebar-title'),
+            html.P(className='sidebar-subtitle', children=[
+                "TREMBLEAU Thibault",
+                html.Br(),
+                "BRUSTOLIN Lucas",
+                html.Br(),
+                "BOYER Alexis"
+            ])
+        ]),
+        dcc.Tabs(id='sidebar-menu', value=pages[0]['id'], className='sidebar-menu', children=[
+            dcc.Tab(
+                label=page['name'],
+                value=page['id'],
+                className='sidebar-item',
+                selected_className='active'
+            ) for page in pages
+        ])
+    ])
 ])
+
+# -------------------- App layout --------------------
+app.layout = html.Div([
+    dcc.Location(id='url'),
+    html.Div(id='page-container', className='page-container', children=
+        dcc.Loading(id='loading', className='page-loading', type='default', children=
+            html.Div(id='page-content', className='page-content')
+        )
+    ),
+    sidebar
+])
+
+# -------------------- Render pages --------------------
+# Store?: https://github.com/salesforce/Merlion/blob/01c3fc3406ebf19798cedcddbe829ae5339e1424/merlion/dashboard/server.py
+@app.callback(
+    Output('page-content', 'children'),
+    [Input('sidebar-menu', 'value')]
+)
+def render_content(tab):
+    if tab is None:
+        return home.create_layout()
+    else:
+        for page in pages:
+            if tab == page['id']:
+                return page['layout']
 
 if __name__ == '__main__':
     app.run(debug=True)
