@@ -50,3 +50,8 @@ python3 app.py
 si python 3 et 2.7 coexiste sur la machine
 
 l'application se lance si tout se passe comme prévu sur `localhost:8050`
+
+# Cluster
+
+## Gaussian mixtures sur les tailles et poids des athlétes 
+En construisant 2 cluster avec les données sur la taille et le poids des athlétes on retrouve les même distribution que la différence entre les hommes et les femmes
