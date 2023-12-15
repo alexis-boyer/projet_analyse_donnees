@@ -2,7 +2,6 @@ import dash
 from dash import html, dash_table, dcc
 from sklearn.preprocessing import StandardScaler
 from sklearn.mixture import GaussianMixture
-import plotly.graph_objects as go
 import plotly.express as px
 
 
