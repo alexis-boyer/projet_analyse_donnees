@@ -6,14 +6,33 @@ def create_layout(data) -> html.Div:
     df_athelete = data['df_athlete']
     df_athelete['Medal'].fillna('No Medal', inplace=True)
 
-    medal_count = df_athelete.groupby(['NOC', 'Medal']).Medal.count().reset_index(name='counts')
+    medal_count = df_athelete.groupby(['NOC', 'Medal']).Medal.count().reset_index(name='Medals')
     medal_count = medal_count[medal_count['Medal'] != 'No Medal']
     
-    figure = px.bar(medal_count, x="NOC", y="counts", color="Medal", barmode="group")
+    color_discrete_map = {
+    'Gold': 'gold',
+    'Silver': 'silver',
+    'Bronze': 'brown',
+    }
+
+    figure = px.bar(medal_count, x="NOC", y="Medals", color="Medal", barmode="stack", color_discrete_map=color_discrete_map)
+
+    gender_count = df_athelete.groupby(['Sex', 'Year']).Sex.count().reset_index(name='Athletes')
+
+    color_discrete_map = {
+    'M': 'blue',
+    'F': 'pink',
+    }
+
+    combined_gender_count = gender_count.pivot(index='Year', columns='Sex', values='Athletes').reset_index()
+
+    stacked_bar_figure = px.bar(gender_count, x="Year", y="Athletes", color="Sex", barmode="stack", color_discrete_map=color_discrete_map)
+    line_figure = px.line(combined_gender_count, x="Year", y=["M", "F"], color_discrete_map=color_discrete_map)
 
     return html.Div([
-        html.H2(children='Page 1'),
-        #dash_table.DataTable(df_athelete.to_dict('records'), [{"name": i, "id": i} for i in df_athelete.loc[:,["Name", "Age", "Weight"]]], page_size=50),
-        dcc.Graph(id='medal-distribution-chart', figure=figure),
-        # dash_table.DataTable(data['df_athlete'].groupby('NOC')['NOC'].transform('count'))
+        html.H2(children='Medals'),
+        dcc.Graph(figure=figure),
+        html.H2(children='Number of men and women over time'),
+        dcc.Graph(figure=stacked_bar_figure),
+        dcc.Graph(figure=line_figure),
     ])
