@@ -38,7 +38,7 @@ Ce site est référencé par 135 liens éxterne, est composé de profésinel et 
 
 ## Fonctionnement de l'application
 
-Pour pouvoir se lancer l'application a besoin de python 3.11 avec les modules plotly (lien), dash (lien), numpy (lien) et sklearn (lien) installés.
+Pour pouvoir se lancer l'application a besoin de python 3.11 avec les modules Plotly (lien), Dash (lien), Numpy (lien), Networkx (lien) et Sklearn (lien) installés.
 Les commandes suivantes permettent de lancé l'application
 ```
 python app.py
@@ -50,8 +50,11 @@ python3 app.py
 si python 3 et 2.7 coexiste sur la machine
 
 l'application se lance si tout se passe comme prévu sur `localhost:8050`
+NB : l'application peut prendre un certains temps pour se lancer à cause des caulculs important notament ceux sur les graphs
 
 # Cluster
 
 ## Gaussian mixtures sur les tailles et poids des athlétes 
 En construisant 2 cluster avec les données sur la taille et le poids des athlétes on retrouve les même distribution que la différence entre les hommes et les femmes
+
+# Network

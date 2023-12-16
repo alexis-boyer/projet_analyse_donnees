@@ -1,7 +1,7 @@
 # Import packages
 import dash
 from dash import Dash, html, dcc, Input, Output, ALL
-from pages import cluster, home, page1
+from pages import cluster, home, page1, network
 import pandas as pd
 
 # Initialize the app
@@ -31,6 +31,11 @@ pages = [
         'id': 'cluster',
         'name': 'Cluster',
         'layout': cluster.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
+    },
+    {
+        'id': 'network',
+        'name': 'Network',
+        'layout': network.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
     }
 ]
 
