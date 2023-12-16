@@ -1,15 +1,18 @@
 from dash import html, dcc
+import dash_cytoscape as cyto
 import networkx as nx
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 from math import sqrt
 
 MIN_WEIGHT = 500
 
 def create_layout(data) -> html.Div:
-    fig = create_contry_podium_network(data['df_athlete'])
     return html.Div([
         html.H2('Network'),
-        dcc.Graph(figure = fig),
+        cyto.Cytoscape(
+            elements=nx.cytoscape_data(create_contry_podium_network(data['df_athlete']))["elements"]
+        )
     ])
 
 def create_contry_podium_network(athletes_df):
@@ -51,21 +54,67 @@ def create_contry_podium_network(athletes_df):
     G.remove_nodes_from(isolated_nodes)
 
     # pos
-    pos = nx.spring_layout(G, seed=7, k=5/sqrt(G.order()), scale=3)
-    nx.draw_networkx_labels(G, pos, font_size=20, font_family="sans-serif")
+    # pos = nx.spring_layout(G, seed=7, k=5/sqrt(G.order()), scale=3)
+    # nx.draw_networkx_labels(G, pos, font_size=20, font_family="sans-serif")
 
-    # nodes
-    nx.draw_networkx_nodes(G, pos, node_size=1500)
+    # # nodes
+    # nx.draw_networkx_nodes(G, pos, node_size=1500)
 
-    # edges
-    nx.draw_networkx_edges(G, pos, width=6)
+    # # edges
+    # nx.draw_networkx_edges(G, pos, width=6)
 
-    # edge weight labels
-    edge_labels = nx.get_edge_attributes(G, "weight")
-    nx.draw_networkx_edge_labels(G, pos, edge_labels)
+    # # edge weight labels
+    # edge_labels = nx.get_edge_attributes(G, "weight")
+    # nx.draw_networkx_edge_labels(G, pos, edge_labels)
 
-    ax = plt.gca()
-    ax.margins(0.08)
-    plt.axis("off")
-    plt.tight_layout()
-    plt.show()
+    # ax = plt.gca()
+    # ax.margins(0.08)
+    # plt.axis("off")
+    # plt.tight_layout()
+    # plt.show()
+
+    return G
+
+def convert_networkx_to_pyplot(G):
+    edge_x = []
+    edge_y = []
+    for edge in G.edges():
+        x0, y0 = G.nodes[edge[0]]['pos']
+        x1, y1 = G.nodes[edge[1]]['pos']
+        edge_x.append(x0)
+        edge_x.append(x1)
+        edge_x.append(None)
+        edge_y.append(y0)
+        edge_y.append(y1)
+        edge_y.append(None)
+
+    edge_trace = go.Scatter(
+        x=edge_x, y=edge_y,
+        line=dict(width=0.5, color='#888'),
+        hoverinfo='none',
+        mode='lines')
+
+    node_x = []
+    node_y = []
+    for node in G.nodes():
+        x, y = G.nodes[node]['pos']
+        node_x.append(x)
+        node_y.append(y)
+
+    node_trace = go.Scatter(
+        x=node_x, y=node_y,
+        mode='markers',
+        hoverinfo='text',
+        marker=dict(
+            showscale=True,
+            colorscale='YlGnBu',
+            reversescale=True,
+            color=[],
+            size=10,
+            colorbar=dict(
+                thickness=15,
+                title='Node Connections',
+                xanchor='left',
+                titleside='right'
+            ),
+            line_width=2))
