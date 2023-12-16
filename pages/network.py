@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 from math import sqrt
 
 MIN_WEIGHT = 500
+MAX_THICKNESS = 3
 
 def create_layout(data) -> html.Div:
     return html.Div([
@@ -51,41 +52,35 @@ def create_contry_podium_network(athletes_df):
     # Remove isolated nodes from the graph
     G.remove_nodes_from(isolated_nodes)
 
-    # # pos
+    # pos
     pos = nx.spring_layout(G, seed=7, k=5/sqrt(G.order()), scale=3)
-    # nx.draw_networkx_labels(G, pos, font_size=20, font_family="sans-serif")
-
-    # # nodes
-    # nx.draw_networkx_nodes(G, pos, node_size=1500)
-
-    # # edges
-    # nx.draw_networkx_edges(G, pos, width=6)
-
-    # # edge weight labels
-    # edge_labels = nx.get_edge_attributes(G, "weight")
-    # nx.draw_networkx_edge_labels(G, pos, edge_labels)
 
     return convert_networkx_to_pyplot(G, pos)
 
 def convert_networkx_to_pyplot(G, pos):
     edge_x = []
     edge_y = []
+    weight = []
     for edge in G.edges():
         x0, y0 = pos[edge[0]]
         x1, y1 = pos[edge[1]]
-        edge_x.append(x0)
-        edge_x.append(x1)
-        edge_x.append(None)
-        edge_y.append(y0)
-        edge_y.append(y1)
-        edge_y.append(None)
+        edge_x.append((x0, x1))
+        edge_y.append((y0, y1))
+        weight.append(G.get_edge_data(edge[0], edge[1])['weight'])
 
-    edge_trace = go.Scatter(
-        x=edge_x, y=edge_y,
-        line=dict(width=0.5, color='#888'),
-        hoverinfo='none',
-        mode='lines')
+    max_weight = max(weight)
+    thickness = [ MAX_THICKNESS*(x / max_weight) for x in weight ]
 
+    edge_trace = []
+
+    for i in range(len(edge_x)):
+        edge_trace.append(
+            go.Scatter(
+                x=edge_x[i], y=edge_y[i],
+                line=dict(width=thickness[i], color='#888'),
+                hoverinfo='none',
+                mode='lines')
+        )
     node_x = []
     node_y = []
     for node in G.nodes():
@@ -115,14 +110,15 @@ def convert_networkx_to_pyplot(G, pos):
     node_text = []
     for node, adjacencies in enumerate(G.adjacency()):
         node_adjacencies.append(len(adjacencies[1]))
-        node_text.append('# of connections: '+str(len(adjacencies[1])))
+
+    node_text = list(G.nodes())
 
     node_trace.marker.color = node_adjacencies
     node_trace.text = node_text
 
-    fig = go.Figure(data=[edge_trace, node_trace],
+    fig = go.Figure(data=edge_trace + [node_trace],
              layout=go.Layout(
-                title='<br>Network graph made with Python',
+                title='Network country medals',
                 titlefont_size=16,
                 showlegend=False,
                 hovermode='closest',
