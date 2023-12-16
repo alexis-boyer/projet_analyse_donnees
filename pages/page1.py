@@ -52,7 +52,7 @@ def create_layout(data) -> html.Div:
         dcc.Graph(figure=px.bar(gender_count, x="Year", y="Athletes", color="Sex", barmode="stack", color_discrete_map=gender_color_mapping)),
         dcc.Graph(figure=px.line(combined_gender_count, x="Year", y=["M", "F"], color_discrete_map=gender_color_mapping)),
         html.H2(children='Evolution of Athletes\' Height Over Time'),
-        dcc.Graph(figure=px.box(df_weight, x='Year', y='Height', color='Sex', color_discrete_map=gender_color_mapping)),
+        dcc.Graph(figure=px.box(df_height, x='Year', y='Height', color='Sex', color_discrete_map=gender_color_mapping)),
         html.H2(children='Evolution of Athletes\' Weight Over Time'),
         dcc.Graph(figure=px.box(df_weight, x='Year', y='Weight', color='Sex', color_discrete_map=gender_color_mapping)),
     ])
