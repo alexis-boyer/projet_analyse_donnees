@@ -42,11 +42,11 @@ def create_layout(data) -> html.Div:
     combined_gender_count = gender_count.pivot(index='Year', columns='Sex', values='Athletes').reset_index()
 
     return html.Div([
-        html.H2(children='Medals counts by nations'),
+        html.H2(children='Medals by nations'),
         dcc.Graph(figure=px.bar(medal_count_by_country, x="NOC", y="Medals count", color="Medal", barmode="stack", color_discrete_map=medal_color_mapping)),
-        html.H2(children='Medals counts for men by nations'),
+        html.H2(children='Medals for men by nations'),
         dcc.Graph(figure=px.bar(men_medal_count, x="NOC", y="Medals count", color="Medal", labels={'Medals': 'Count', 'NOC': 'Country', 'Medal': 'Medal Type'}, color_discrete_map=medal_color_mapping)),
-        html.H2(children='Medals counts for women by nations'),
+        html.H2(children='Medals for women by nations'),
         dcc.Graph(figure=px.bar(women_medal_count, x="NOC", y="Medals count", color="Medal", labels={'Medals': 'Count', 'NOC': 'Country', 'Medal': 'Medal Type'}, color_discrete_map=medal_color_mapping)),
         html.H2(children='Number of men and women over time'),
         dcc.Graph(figure=px.bar(gender_count, x="Year", y="Athletes", color="Sex", barmode="stack", color_discrete_map=gender_color_mapping)),
