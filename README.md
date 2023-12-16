@@ -36,3 +36,22 @@ Les données ont été éxtraite du site [https://www.sports-reference.com/](htt
 Ce site est référencé par 135 liens éxterne, est composé de profésinel et financé par des grands groupe de sport.
 ![lien référent à https://www.sports-reference.com/](pictures_readme/number_of_link_sport_reference.png)
 
+## Fonctionnement de l'application
+
+Pour pouvoir se lancer l'application a besoin de python 3.11 avec les modules plotly (lien), dash (lien), numpy (lien) et sklearn (lien) installés.
+Les commandes suivantes permettent de lancé l'application
+```
+python app.py
+```
+ou
+```
+python3 app.py
+```
+si python 3 et 2.7 coexiste sur la machine
+
+l'application se lance si tout se passe comme prévu sur `localhost:8050`
+
+# Cluster
+
+## Gaussian mixtures sur les tailles et poids des athlétes 
+En construisant 2 cluster avec les données sur la taille et le poids des athlétes on retrouve les même distribution que la différence entre les hommes et les femmes

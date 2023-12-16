@@ -1,7 +1,7 @@
 # Import packages
 import dash
 from dash import Dash, html, dcc, Input, Output, ALL
-from pages import home, page1, page2
+from pages import cluster, home, page1
 import pandas as pd
 
 # Initialize the app
@@ -28,9 +28,9 @@ pages = [
         'layout': page1.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
     },
     {
-        'id': 'page2',
-        'name': 'Page 2',
-        'layout': page2.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
+        'id': 'cluster',
+        'name': 'Cluster',
+        'layout': cluster.create_layout({'df_athlete': df_athlete, 'df_noc': df_noc})
     }
 ]
 
