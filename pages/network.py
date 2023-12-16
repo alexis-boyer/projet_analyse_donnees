@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from math import sqrt
 
-MIN_WEIGHT = 500
+MIN_WEIGHT = 200
 MAX_THICKNESS = 3
 
 def create_layout(data) -> html.Div:
