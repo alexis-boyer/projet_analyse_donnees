@@ -1,5 +1,4 @@
 from dash import html, dcc
-import dash_cytoscape as cyto
 import networkx as nx
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -118,7 +117,7 @@ def convert_networkx_to_pyplot(G, pos):
 
     fig = go.Figure(data=edge_trace + [node_trace],
              layout=go.Layout(
-                title='Network country medals',
+                title='Network countries by shared podiums on 1968',
                 titlefont_size=16,
                 showlegend=False,
                 hovermode='closest',
