@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from math import sqrt
 
-MIN_WEIGHT = 200
+MIN_WEIGHT = 150
 MAX_THICKNESS = 3
 
 def create_layout(data) -> html.Div:
@@ -23,9 +23,8 @@ def create_contry_podium_graph(athletes_df):
     G = nx.Graph()
 
     # Iterate through each row in the dataframe
-    data_df = athletes_df[(athletes_df['Year'] == 1968)].dropna(subset=['Medal'])
+    data_df = (athletes_df[(athletes_df['Year'] == 1968)].dropna(subset=['Medal']))[['Year', 'NOC', 'Sport', 'Medal']].drop_duplicates()
     for index, row in data_df.iterrows():
-        id1 = row['ID']
         country1 = row['NOC']
         year = row['Year']
         sport = row['Sport']
@@ -35,7 +34,7 @@ def create_contry_podium_graph(athletes_df):
         if medal:
             # Find other countries that won a medal in the same year and sport
             same_year_sport = data_df[(data_df['Year'] == year) & (data_df['Sport'] == sport) & 
-                                            (data_df['ID'] != id1) & (data_df['NOC'] != country1)]
+                                            (data_df['NOC'] != country1)]
 
             # Add edges between the current country and other countries in the same year and sport
             for _, other_row in same_year_sport.iterrows():
