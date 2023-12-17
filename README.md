@@ -66,37 +66,38 @@ NB : l'application peut prendre un certains temps pour se lancer à cause des ca
 
 ![](pictures_readme/overview/weight_evolution.png)
 
-# Overview
-
-![](pictures_readme/overview/Medals_by_nations.png)
-
-![](pictures_readme/overview/Mens_medals_by_nation.png)
-
-![](pictures_readme/overview/Womens_medals_by_nation.png)
-
-![](pictures_readme/overview/Number_of_men_and_women_over_time.png)
-
-![](pictures_readme/overview/height_evolution.png)
-
-![](pictures_readme/overview/weight_evolution.png)
-
-# Overview
-
-![](pictures_readme/overview/Medals_by_nations.png)
-
-![](pictures_readme/overview/Mens_medals_by_nation.png)
-
-![](pictures_readme/overview/Womens_medals_by_nation.png)
-
-![](pictures_readme/overview/Number_of_men_and_women_over_time.png)
-
-![](pictures_readme/overview/height_evolution.png)
-
-![](pictures_readme/overview/weight_evolution.png)
-
 # Cluster
 
-## Gaussian mixtures sur les tailles et poids des athlétes 
-En construisant 2 cluster avec les données sur la taille et le poids des athlétes on retrouve les même distribution que la différence entre les hommes et les femmes
+## Difference entre athlétes homme et femme
+![](pictures_readme/cluster/homme-femme-taille.png)
+
+Sur le premier graphe, on voit la taille et le poids des athlètes, ainsi que leurs sexes (rose pour les femmes et bleu pour les hommes). Sur le deuxième graphe, on voit que la division de la population entre 2 groupes.
+À l'aide de l'algorithme Gaussian Mixture, on peut voir que deux groupes se dégagent, le groupe des athlètes petits et pas très lourds et celui des grands et lourds. Le premier est essentiellement constitué de femmes et d'athlètes qui pratiquent des sports dans lesquels la taille n'est pas un avantage (gymnastique, tennis de table, etc.) et dans l'autre, il s'agit essentiellement des hommes et des athlètes qui pratiquent un sport dans lequel le poids et la taille est un avantage. (basket, haltérophilie, etc.)
+
+## Difference entre pays  
+![](pictures_readme/cluster/medail-pays-annee.png)
+Sur le premier graphe, on voit le nombre de médailles gagné par pays en fonction des années.
+Sur le deuxième, on voit la partition en 4 clusters grâce à l'algorithme Gaussian Mixture. On peut observer que les pays sont séparés entre ceux qui gagnent tout le temps, ce qui gagne un peu, ceux qui ne gagnent pas et depuis 1980 (essentiellement des anciens pays de l'URSS) et ceux qui ne gagne pas depuis toujours.
+
+Pour chaque détection de cluster, on utilise l'algorithme Gaussian Mixture, car les clusters que l'on cherche ne sont pas sphériques et on connaît déjà le nombre de communautés que l'on attend.
+Pour chaque cluster, nous avons centré et réduit les valeurs avant de leur appliquer l'algorithme.
 
 # Network
+
+## Construction du graph
+![](pictures_readme/network/vanilla-graph.png)
+Pour construire le graphe, on lie chaque pays avec les pays avec lesquels ils ont partagé un podium au jeu de l'année 1968, plus ils ont de podium plus les liens sont forts. Dans le graphe, le poids des liens est représenté avec l'épaisseur du trait.
+Seuls les pays ayant reçu plus de 50 médailles sont conserver afin de rendre le graphe plus claire.
+
+## Analyse du degré
+![](pictures_readme/network/degree-graph.png)
+Ici, on voit le même graphe que précédemment, mais avec la couler des points représentant leur dégrées. On voit que l'URSS à partager des podium avec plein de pays diffèrent, encore plus que les USA. C'est dû au fait que l'URSS est forte à la fois au JO d'été et d'hiver là où les USA sont moins bons en hiver.
+
+## Analyse de centralité
+![](pictures_readme/network/closness-centrality-graph.png)
+Ici, la centralité a été représentée par la couleur du point.
+On retrouve l'importance de l'URSS. Ici le fait que l'URSS gagne les deux Jeux olympiques devient plus important
+
+## Analyse par communauté
+![](pictures_readme/network/comunity-graph.png)
+Ici, les pays sont séparés en communauté par la méthode de Louvain et on voit clairement la séparation des pays qui ne gagnent qu'en hiver (Norvège, Suède, etc.) et ceux qui ne gagnent que ceux d'été (Italie, Espagne, Allemagne de l'Ouest)

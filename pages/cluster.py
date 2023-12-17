@@ -93,7 +93,7 @@ def create_medal_country_cluster(athletes_df):
     athletes_grouped_numerical_standardized_df = scaler.fit_transform(athletes_grouped_numerical_df)
 
     # use GaussianMixture on standardized data
-    n_components = 4
+    n_components = 6
     gmm = GaussianMixture(n_components=n_components, random_state=42)
     gmm.fit(athletes_grouped_numerical_standardized_df)
     athletes_grouped_df['Cluster'] = gmm.predict(athletes_grouped_numerical_standardized_df)
