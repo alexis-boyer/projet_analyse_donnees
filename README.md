@@ -66,6 +66,20 @@ NB : l'application peut prendre un certains temps pour se lancer à cause des ca
 
 ![](pictures_readme/overview/weight_evolution.png)
 
+# Overview
+
+![](pictures_readme/overview/Medals_by_nations.png)
+
+![](pictures_readme/overview/Mens_medals_by_nation.png)
+
+![](pictures_readme/overview/Womens_medals_by_nation.png)
+
+![](pictures_readme/overview/Number_of_men_and_women_over_time.png)
+
+![](pictures_readme/overview/height_evolution.png)
+
+![](pictures_readme/overview/weight_evolution.png)
+
 # Cluster
 
 ## Gaussian mixtures sur les tailles et poids des athlétes 
