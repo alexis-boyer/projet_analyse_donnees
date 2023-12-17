@@ -1,5 +1,4 @@
-import dash
-from dash import html, dash_table, dcc
+from dash import html, dcc
 from sklearn.preprocessing import StandardScaler
 from sklearn.mixture import GaussianMixture
 import plotly.express as px
