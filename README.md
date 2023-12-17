@@ -51,6 +51,20 @@ si python 3 et 2.7 coexiste sur la machine
 
 l'application se lance si tout se passe comme prévu sur `localhost:8050`
 
+# Overview
+
+![](pictures_readme/overview/Medals_by_nations.png)
+
+![](pictures_readme/overview/Mens_medals_by_nation.png)
+
+![](pictures_readme/overview/Womens_medals_by_nation.png)
+
+![](pictures_readme/overview/Number_of_men_and_women_over_time.png)
+
+![](pictures_readme/overview/height_evolution.png)
+
+![](pictures_readme/overview/weight_evolution.png)
+
 # Cluster
 
 ## Gaussian mixtures sur les tailles et poids des athlétes 
