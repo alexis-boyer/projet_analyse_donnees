@@ -2,6 +2,7 @@
 import dash
 from dash import Dash, html, dcc, Input, Output, ALL
 from pages import cluster, home, overview, network
+
 import pandas as pd
 
 # Initialize the app
