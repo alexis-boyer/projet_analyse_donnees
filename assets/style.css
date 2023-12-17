@@ -1,6 +1,7 @@
 :root {
     --main-color: #175797;
     --font-color: #333333;
+    --font-color-2: #666666;
     --font-color-inverse: #ffffff;
     --font-color-inverse-2: #cccccc;
     --side-color: #1b1b1b;
@@ -91,4 +92,137 @@ html, body {
 .page-container {
     margin-left: var(--sidebar-size);
     padding: 5px 15px;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.home-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0 50px 0;
+    text-align: center;
+    max-width: 1200px;
+}
+.home-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+.home-header-image {
+    margin-left: 100px;
+    width: 700px;
+}
+.home-header-image img {
+    border-radius: 20px;
+    width: 100%;
+}
+.home-title {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 3em;
+}
+.home-subtitle {
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: normal;
+    font-style: italic;
+    color: var(--font-color-2);
+}
+.home-paragraph {
+    margin: 0;
+    font-size: 1.2em;
+}
+.home-paragraph:last-of-type {
+    font-style: italic;
+}
+.home-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+.button-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--main-color);
+    color: var(--font-color-inverse);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all 0.1s ease-in-out;
+}
+.button-link:hover {
+    background-color: var(--font-color-inverse);
+    color: var(--main-color);
+}
+
+.home-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    max-width: 1300px;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+}
+.home-section .paragraph {
+    width: 30%;
+}
+.home-table {
+    margin-left: 20px;
+    width: 70%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    empty-cells: hide;
+    font-size: 0.9em;
+}
+.home-table, .home-table th, .home-table td {
+    /* border: 1spx solid var(--font-color-2); */
+}
+.home-table th {
+    border: none;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--main-color);
+    color: var(--font-color-inverse);
+    text-align: left;
+}
+.home-table td {
+    padding: 5px;
+    background-color: white;
+}
+.home-table td:last-of-type {
+    border-radius: 0 10px 10px 0;
+}
+.home-table tr td:first-of-type {
+    font-weight: bold;
+}
+.home-table .home-table-top-row th {
+    border-radius: 0;
+    text-align: center;
+}
+.home-table .home-table-top-row th:nth-child(2) {
+    border-radius: 10px 0 0 10px;
+}
+.home-table .home-table-top-row th:last-of-type {
+    border-radius: 0 10px 10px 0;
 }
