@@ -106,7 +106,7 @@ def simple_graph_pyplot(G, pos):
 
     fig = go.Figure(data=edge_trace + [node_trace],
              layout=go.Layout(
-                title='Network countries by shared podiums on 1968 with nodes degree',
+                title='Countries network by shared podiums on 1968 games',
                 titlefont_size=16,
                 showlegend=False,
                 hovermode='closest',
@@ -165,7 +165,7 @@ def degree_graph_pyplot(G, pos):
             size=10,
             colorbar=dict(
                 thickness=15,
-                title='Node Connections',
+                title='Node Degree',
                 xanchor='left',
                 titleside='right'
             ),
@@ -183,7 +183,7 @@ def degree_graph_pyplot(G, pos):
 
     fig = go.Figure(data=edge_trace + [node_trace],
              layout=go.Layout(
-                title='Network countries by shared podiums on 1968',
+                title='Countries network by shared podiums on 1968 games with nodes degree',
                 titlefont_size=16,
                 showlegend=False,
                 hovermode='closest',
@@ -242,7 +242,7 @@ def closeness_graph_pyplot(G, pos):
             size=10,
             colorbar=dict(
                 thickness=15,
-                title='Node Connections',
+                title='Node Closeness Centrality',
                 xanchor='left',
                 titleside='right'
             ),
@@ -253,7 +253,7 @@ def closeness_graph_pyplot(G, pos):
 
     fig = go.Figure(data=edge_trace + [node_trace],
              layout=go.Layout(
-                title='Network countries by shared podiums on 1968 with nodes closeness',
+                title='Countries network by shared podiums on 1968 games with nodes closeness centrality',
                 titlefont_size=16,
                 showlegend=False,
                 hovermode='closest',
@@ -312,7 +312,7 @@ def louvain_communities_graph_pyplot(G, pos):
             size=10,
             colorbar=dict(
                 thickness=15,
-                title='Node Connections',
+                title='Node Community',
                 xanchor='left',
                 titleside='right'
             ),
@@ -333,7 +333,7 @@ def louvain_communities_graph_pyplot(G, pos):
 
     fig = go.Figure(data=edge_trace + [node_trace],
              layout=go.Layout(
-                title='Network countries by shared podiums on 1968 with community',
+                title='Countries network by shared podiums on 1968 games with community',
                 titlefont_size=16,
                 showlegend=False,
                 hovermode='closest',
