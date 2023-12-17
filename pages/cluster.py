@@ -11,10 +11,10 @@ def create_layout(data) -> html.Div:
     figGMMCountry = create_medal_country_cluster(data['df_athlete'])
     return html.Div([
         html.H2(children='Cluster'),
-        html.H3(children='Homme/Femme'),
+        html.H3(children='Men/Women'),
         dcc.Graph(figure = figGMM),
         dcc.Graph(figure = figSex),
-        html.H3(children='Medail remporté'),
+        html.H3(children='Won Medal'),
         dcc.Graph(figure = figCouuntry),
         dcc.Graph(figure = figGMMCountry)
     ])
